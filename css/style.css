@@ -1,0 +1,13 @@
+#canvas{
+    width: 480px;
+    height: 270px;
+    background-color: #000000;
+    position: relative;
+}
+#block{
+    background-color: #FFFFFF;
+}
+html, body{
+    align-content: center;
+    text-align: center;
+}
