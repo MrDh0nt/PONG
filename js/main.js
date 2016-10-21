@@ -1,9 +1,6 @@
 var testerrr = 0;
 var loop;
 var keypresss;
-function init(){
-    loop = setInterval(gameLoop(), (60/1000));
-}
 function make(width, height, id){
     var thisobject = document.getElementById(id);
     document.getElementById(id).style.width = width;
@@ -23,4 +20,7 @@ function gameLoop(){
             break;
     }
 };
+}
+function init() {
+    loop = setInterval(gameLoop(), (60 / 1000));
 }
