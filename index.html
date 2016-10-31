@@ -1,22 +1,19 @@
 <!doctype html>
 
-<html lang="en">
+<html lang="en" id="myBody">
 <head>
     <meta charset="utf-8">
     <title>The PONG Game</title>
     <meta name="description" content="A PONG game made by Evert Dhont">
     <meta name="developer" content="Evert Dhont">
-    <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/style.css">
 
     <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <![endif]-->
 </head>
-
-<body  onload="init(), make('10px', '30%', 'block')">
-    <div id="canvas"><!--The rest is done in js/main.js-->
-        <div id="block"></div>
-    </div>
+<body>
+    <canvas id="myCanvas"></canvas>
+	<script src="js/main.js"></script>
 </body>
 </html>
