@@ -5,14 +5,10 @@
 html, body{
     align-content: center;
     text-align: center;
-}
-br{
-    height: 10px;
+    font-family: 'VT323', monospace;
 }
 .cheatsheet{
     width: 300px;
-    text-align: left;
-}
-.contentDiv{
-    float: left;
+    text-align: center;
+    margin: auto;
 }

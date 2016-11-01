@@ -22,6 +22,8 @@ var barChange = 8;
 var upPress = false;
 var downPress = false;
 var bodyHtml = document.getElementById("myBody");
+var playerScore = 0;
+var computerScore = 0;
 
 var draw = {
 	rectangle: function (x, y, w, h, color) {
@@ -35,8 +37,12 @@ var draw = {
         ctx.beginPath();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.closePath();
+    },
+    score: function (scoree, y) {
+        ctx.font = "80px VT323";
+        ctx.textAlign = "center";
+        ctx.fillText(scoree, ((canvas.width/2) - y), 50);
     }
-	
 };
 function keyDownHandler(e){
     console.log("keydown: " + e.keyCode); //upArr: 38 downArr: 40
@@ -76,18 +82,22 @@ function gameLoop() {
             xchange = -xchange;
         }else if(ballx < 0){
             ballx = canvas.width / 2 - ballr;
+            bally = canvas.height / 2 - ballr;
             corner = Math.random() * ((pi / 4) - (3 * pi / 4)) + pi / 4;
             xchange = 5 * Math.cos(corner);
             ychange = 5 * Math.sin(corner);
+            computerScore += 1;
         }
     }else if(ballx + ballr >= canvas.width - barwidth){
         if(bally + ballr >= cY && bally <= (cY + barheight)){
             xchange = -xchange;
         }else if(ballx + ballr > canvas.width){
             ballx = canvas.width / 2 - ballr;
+            bally = canvas.height / 2 - ballr;
             corner = Math.random() * ((pi / 4) - (3 * pi / 4)) + pi / 4;
             xchange = 5 * Math.cos(corner);
             ychange = 5 * Math.sin(corner);
+            playerScore += 1;
         }
     }
     if(bally < 0 || bally + ballr > canvas.height) { //if ball is on top or bottom of the screen border
@@ -117,6 +127,9 @@ function gameLoop() {
     for(var i = 0; i < canvas.height; i = i + 20){
         draw.rectangle((canvas.width / 2) - 2.5, i, 5, 13);
     }
+    draw.score(playerScore, 50);
+    draw.score(computerScore, -50);
+    draw.score("-", 0);
     
     ballx += xchange;
     bally += ychange;
