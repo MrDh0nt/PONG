@@ -45,7 +45,7 @@ var draw = {
     }
 };
 function keyDownHandler(e){
-    console.log("keydown: " + e.keyCode); //upArr: 38 downArr: 40
+    //console.log("keydown: " + e.keyCode); //upArr: 38 downArr: 40
     if(e.keyCode === 38){
         upPress = true;
     }else if(e.keyCode === 40){
