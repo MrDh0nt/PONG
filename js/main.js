@@ -1,4 +1,3 @@
-
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 canvas.width = 600;
@@ -24,6 +23,7 @@ var downPress = false;
 var bodyHtml = document.getElementById("myBody");
 var playerScore = 0;
 var computerScore = 0;
+var multiplier = 0.75;
 
 var draw = {
 	rectangle: function (x, y, w, h, color) {
@@ -67,6 +67,12 @@ function keyUpHandler(e){
         barWhite = "#FFF";
     }else if(e.keyCode === 16){
         barChange = barChange * 2;
+    }else if(e.keyCode === 78){
+        corner = Math.random() * ((pi / 4) - (3 * pi / 4)) + pi / 4;
+        xchange = 5 * Math.cos(corner);
+        ychange = 5 * Math.sin(corner);
+        ballx = canvas.width / 2;
+        bally = canvas.height / 2 - ballr / 2;
     }
 }
 
@@ -105,10 +111,10 @@ function gameLoop() {
     }
     if(downPress){ //change of the paddle
         pY += barChange;
-        cY += barChange;
+        //cY += barChange;
     }else if(upPress){
         pY -= barChange;
-        cY -= barChange;
+        //cY -= barChange;
     }
     if(pY < 0){
         pY = 0;
@@ -119,6 +125,15 @@ function gameLoop() {
         cY = 0;
     }else if((cY + barheight) > canvas.height){
         cY = canvas.height - barheight
+    }
+    if(ballx > canvas.width/2){
+        if(bally < cY || bally > cY + barheight){
+            if(cY + barheight / 2 < bally + ballr / 2){
+                cY += barChange * multiplier;
+            }else if(cY + barheight / 2 > bally + ballr / 2){
+                cY -= barChange * multiplier;
+            }
+        }
     }
     //3 drawing
     draw.rectangle(pX, pY, barwidth, barheight, barWhite);
