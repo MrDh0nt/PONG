@@ -12,3 +12,14 @@ html, body{
     text-align: center;
     margin: auto;
 }
+.inlineRdio{
+	display: inline-block;
+}
+.oneLine{
+	text-align: left;
+	float: left;
+	vertical-align: middle;
+}
+#left{
+	float: left;
+}

@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/keys.css">
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
-    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -23,8 +21,22 @@
         <p>
             <u><h1>Cheats</h1></u>
             <a><kbd>space</kbd></a> - bredere paddle's<br><br>
-            <a><kbd>shift</kbd></a> - slow motion
+			<a><kbd>N</kbd></a> - niewe "bal" <br><br>
+            <!--<a><kbd>shift</kbd></a> - slow motion-->
         </p>
+		<br>
+		<div id="settings">
+			<h1>Instellingen</h1>
+			<p>Hier kan je de instellingen van het spel veranderen</p>
+				<div id="left">Moeilijkheid:</div>
+				<div class="oneLine">
+				<form id="difficulty">
+				<input class="inlineRdio" type="radio" name="moeilijkheid" value="0" checked>Gemakkelijk<br>
+				<input class="inlineRdio" type="radio" name="moeilijkheid" value="1">Gemiddeld<br>
+				<input class="inlineRdio" type="radio" name="moeilijkheid" value="2">Moeilijk
+				</form>
+				</div>
+		</div>
     </div>
 </body>
 </html>
