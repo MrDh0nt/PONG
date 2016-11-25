@@ -23,3 +23,9 @@ html, body{
 #left{
 	float: left;
 }
+#note{
+	font-size: 12px;
+	background-color: #ff9393;
+	width: auto;
+	display: inline;
+}

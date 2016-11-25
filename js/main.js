@@ -140,7 +140,7 @@ function gameLoop() {
     }else if((cY + barheight) > canvas.height){
         cY = canvas.height - barheight
     }
-    if(true){ //ballx > canvas.width/2){
+    if(ballx > canvas.width/2){
         if(bally < cY || bally > cY + barheight){
             if(cY + barheight / 2 < bally + ballr / 2){
                 cY += barChange * multiplier;
@@ -165,6 +165,15 @@ function gameLoop() {
     bally += Math.floor(ychange * multiplierBall) + ychange;
 	//last computations
 	//difficultyChoice = difficulty[];
-	console.log(document.getElementById('input[name="moeilijkheid"]:checked').value);
+	var difff = document.getElementsByName("moeilijkheid");
+	if (difff) {
+		for (var i = 0; i < difff.length; i++) {
+			if (difff[i].checked){
+				difficultyChoice = difff[i].value;
+			}
+		}
+	}
+	multiplier = difficulty[difficultyChoice];
+	multiplier = difficulty[difficultyChoice];
 }
 setInterval(gameLoop, 20);
