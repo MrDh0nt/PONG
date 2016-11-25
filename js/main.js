@@ -23,7 +23,11 @@ var downPress = false;
 var bodyHtml = document.getElementById("myBody");
 var playerScore = 0;
 var computerScore = 0;
-var multiplier = 0.75;
+var difficultyChoice = 0; //easy as standard
+var difficulty = [0.45, 0.55, 0.65];
+var multiplier = difficulty[difficultyChoice];
+var hits = 0;
+var multiplierBall = 0;
 
 var draw = {
 	rectangle: function (x, y, w, h, color) {
@@ -65,8 +69,6 @@ function keyUpHandler(e){
     }else if(e.keyCode === 32){
         barheight = 75;
         barWhite = "#FFF";
-    }else if(e.keyCode === 16){
-        barChange = barChange * 2;
     }else if(e.keyCode === 78){
         corner = Math.random() * ((pi / 4) - (3 * pi / 4)) + pi / 4;
         xchange = 5 * Math.cos(corner);
@@ -84,8 +86,11 @@ function gameLoop() {
     bodyHtml.addEventListener("keyup", keyUpHandler);
     //2 logic
     if(ballx <= barwidth) { //if ball is left or right on screen border
-        if(bally + ballr >= pY && bally <= (pY + barheight)){
+        if(bally <= (pY + barheight) && bally + ballr >= pY){ //ball detection on player side
             xchange = -xchange;
+			ballx = pX + barwidth;
+			hits++;
+			console.log('you hit the ball');
         }else if(ballx < 0){
             ballx = canvas.width / 2 - ballr;
             bally = canvas.height / 2 - ballr;
@@ -93,10 +98,14 @@ function gameLoop() {
             xchange = 5 * Math.cos(corner);
             ychange = 5 * Math.sin(corner);
             computerScore += 1;
+			hits = 0;
         }
-    }else if(ballx + ballr >= canvas.width - barwidth){
+    }else if(ballx + ballr >= canvas.width - barwidth){ //ball detection on pc side
         if(bally + ballr >= cY && bally <= (cY + barheight)){
             xchange = -xchange;
+			hits++;
+			console.log('pc hit the ball');
+			ballx = cX - ballr;
         }else if(ballx + ballr > canvas.width){
             ballx = canvas.width / 2 - ballr;
             bally = canvas.height / 2 - ballr;
@@ -104,11 +113,16 @@ function gameLoop() {
             xchange = 5 * Math.cos(corner);
             ychange = 5 * Math.sin(corner);
             playerScore += 1;
+			hits = 0;
         }
     }
-    if(bally < 0 || bally + ballr > canvas.height) { //if ball is on top or bottom of the screen border
-        ychange = -ychange;
-    }
+    if(bally < 0){
+		bally = 0;
+		ychange = -ychange;
+	}else if(bally + ballr > canvas.height) { //if ball is on top or bottom of the screen border
+        bally = canvas.height - ballr;
+		ychange = -ychange;
+	}
     if(downPress){ //change of the paddle
         pY += barChange;
         //cY += barChange;
@@ -116,7 +130,7 @@ function gameLoop() {
         pY -= barChange;
         //cY -= barChange;
     }
-    if(pY < 0){
+    if(pY < 0){ //paddle borders so the paddles don't wander off screen
         pY = 0;
     }else if((pY + barheight) > canvas.height){
         pY = canvas.height - barheight
@@ -145,8 +159,21 @@ function gameLoop() {
     draw.score(playerScore, 50);
     draw.score(computerScore, -50);
     draw.score("-", 0);
-    
-    ballx += xchange;
-    bally += ychange;
+    multiplierBall = hits / 10;
+	console.log(multiplierBall);
+    ballx += Math.floor(xchange * multiplierBall) + xchange;
+    bally += Math.floor(ychange * multiplierBall) + ychange;
+	//last computations
+	//difficultyChoice = difficulty[];
+	var difff = document.getElementsByName("moeilijkheid");
+	if (difff) {
+		for (var i = 0; i < difff.length; i++) {
+			if (difff[i].checked){
+				difficultyChoice = difff[i].value;
+			}
+		}
+	}
+	multiplier = difficulty[difficultyChoice];
+	multiplier = difficulty[difficultyChoice];
 }
 setInterval(gameLoop, 20);
