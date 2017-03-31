@@ -68,7 +68,11 @@
             // adjust canvas
             CANVAS.width = 600;
             CANVAS.height = 400;
-
+            
+            // attach event listeners
+            BODY_EL.addEventListener("keydown", keyDownHandler);
+            BODY_EL.addEventListener("keyup", keyUpHandler);
+            
             // init fields
             _self.barWidth = 15;
             _self.barHeight = 75;
@@ -82,10 +86,7 @@
 
         loop = function () {
             _self.Draw.clearScreen();
-
-            BODY_EL.addEventListener("keydown", keyDownHandler);
-            BODY_EL.addEventListener("keyup", keyUpHandler);
-
+            
             calculateElementPositions();
             drawComponents();
             setDifficultyMultiplier();
